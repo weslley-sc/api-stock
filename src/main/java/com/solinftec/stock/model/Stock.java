@@ -57,8 +57,7 @@ public class Stock {
     @UpdateTimestamp
     @Column(name = "updated_on")
     private Timestamp updatedOn;
-   
-
-    
-    
 }
+    
+    
+
