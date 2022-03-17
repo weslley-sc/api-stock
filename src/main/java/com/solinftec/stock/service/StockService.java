@@ -2,7 +2,7 @@ package com.solinftec.stock.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 import com.solinftec.stock.dto.StockDTO;
 import com.solinftec.stock.model.Stock;
@@ -26,7 +26,14 @@ public class StockService implements IStockService {
         return stockRepository.findAll()
                 .stream()
                 .map(StockDTO::new)
-                .collect(Collectors.toList());
+                .toList();
+    }
+
+    public List<StockDTO> gettAll(){
+        return stockRepository.findAll()
+                .stream()
+                .map(StockDTO::new)
+                .toList();
     }
 
     @Transactional

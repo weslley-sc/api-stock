@@ -34,7 +34,8 @@ public class StockControllerTeste {
         standaloneSetup(this.stockController);
     }
 
-    public void deveRetornarSucesso_QuandoBuscarStock() throws Exception{
+    @Test
+    void deveRetornarSucesso_QuandoBuscarStock() throws Exception{
         when(this.stockService.stockUnico(1L))
 			.thenReturn(new StockDTO(1L, "BEEF", "MINERVA", null, null, null, null));
 		
@@ -47,8 +48,8 @@ public class StockControllerTeste {
         
     }
 
-   @Test
-    public void deveRetornarNaoEncontrado_QuandoBuscarStock() throws Exception{
+    @Test
+    void deveRetornarNaoEncontrado_QuandoBuscarStock() throws Exception{
         when(this.stockService.stockUnico(800L))
                 .thenReturn(null);
         given()
@@ -58,8 +59,9 @@ public class StockControllerTeste {
         .then()
             .statusCode(HttpStatus.NOT_FOUND.value());
     }
-     @Test
-	public void deveRetornarBadRequest_QuandoBuscarStock() throws Exception {
+    
+    @Test
+	void deveRetornarBadRequest_QuandoBuscarStock() throws Exception {
 		
 		given()
 			.accept(ContentType.JSON)
