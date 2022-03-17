@@ -62,4 +62,21 @@ public class StockService implements IStockService {
         return find.map(StockDTO::new);
         
     }
+    public StockDTO updateStocks(StockDTO stocksDto){
+        Stock stocks = stockRepository.findById(stocksDto.getId()).orElseThrow(Error::new);
+        if (stocksDto.getBidMin() != null) {
+            stocks.setBidMin(stocksDto.getBidMin());
+        }
+        if (stocksDto.getBidMax() != null) {
+            stocks.setBidMax(stocksDto.getBidMax());
+        }
+        if (stocksDto.getAskMin() != null){
+            stocks.setAskMin(stocksDto.getAskMin());
+        }
+        if (stocksDto.getAskMax() != null){
+            stocks.setAskMax(stocksDto.getAskMax());
+        }
+        Stock salvando = stockRepository.save(stocks);
+        return new StockDTO(salvando);
+    }
 }

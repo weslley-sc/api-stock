@@ -3,20 +3,19 @@ package com.solinftec.stock.controller;
 import java.util.List;
 import java.util.Optional;
 
-import com.solinftec.stock.repository.StockRepository;
 import com.solinftec.stock.service.StockService;
 import com.solinftec.stock.dto.StockDTO;
-import com.solinftec.stock.model.Stock;
+
 
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +30,7 @@ import lombok.RequiredArgsConstructor;
 public class StockController {
 
 
-    private final StockRepository stockRepository;
+  
 
     private final StockService stockService;
 
@@ -73,15 +72,9 @@ public class StockController {
         return ResponseEntity.ok().body(stockService.stockUnico(id))  ;
     }
 
-    @PutMapping("/askbid")
-    public ResponseEntity<?> askbid(@RequestBody StockDTO dto) {
-        Stock stock = stockRepository.findById(dto.getId()).orElseThrow();
-        if(dto.getAskMax() != null || dto.getBidMin() != null) {
-            stock.setAskMax(dto.getAskMax());
-            stock.setAskMin(dto.getAskMin());
-            stock.setBidMax(dto.getBidMax());
-            stock.setBidMin(dto.getBidMin());
-        }
-        return new ResponseEntity<>(stockRepository.save(stock),HttpStatus.OK);
+    @PostMapping("/update_stocks")
+    public StockDTO updateStocks(
+             @RequestBody StockDTO stocksPricesDto) {
+       return stockService.updateStocks(stocksPricesDto);
     }
 }
