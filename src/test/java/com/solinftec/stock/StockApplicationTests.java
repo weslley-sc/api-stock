@@ -1,5 +1,9 @@
 package com.solinftec.stock;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+import com.solinftec.stock.model.Stock;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -7,7 +11,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 class StockApplicationTests {
 
 	@Test
-	void contextLoads() {
+	void stockTests() {
+		Stock stock = new Stock();
+		assertNull(stock.getStockName());
 	}
 
 }
